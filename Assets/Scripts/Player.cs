@@ -22,6 +22,26 @@ public class Player : MonoBehaviour,IPlayer
     public void Construct(EventBus eventBus)
     {
         _eventBus = eventBus;
+        
+    }
+
+    public void Update()
+    {
+        if (_eventBus != null)
+            Debug.LogError("not null");
+        else 
+            Debug.LogError("null");
+
+    }
+
+    public void Initialize()
+    {
+     //   SendPlayerJoinedEvent();
+    }
+    private void SendPlayerJoinedEvent()
+    {
+        _eventBus.Fire(new GameEvents.OnPlayerJoined(this));
+        Debug.LogError("fired");
     }
 
     public async UniTask TakeCard(CardObject cardObject)

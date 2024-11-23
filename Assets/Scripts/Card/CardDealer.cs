@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.EventBus;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 public class CardDealer : MonoBehaviour
 {
@@ -13,21 +15,34 @@ public class CardDealer : MonoBehaviour
     public CardObject cardObject;
     
     private List<IPlayer> players = new List<IPlayer>();
-    public Player player;
-    public BotPlayer botPlayer;
     
+    private EventBus _eventBus;
 
-    private void Awake()
+    [Inject]
+    public void Construct(EventBus eventBus)
     {
-        Initialize();
-        
-        players.Add(player);
-        players.Add(botPlayer);
+        _eventBus = eventBus;
+    }
+    private void OnEnable()
+    {
+        _eventBus.Subscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);
     }
 
-    private void Initialize()
+    private void OnDisable()
+    {
+        _eventBus.Unsubscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);
+    }
+
+    
+    public void Initialize()
     {
         cardSpriteData = Resources.Load<CardSpriteData>("CardSpriteData");
+    }
+    
+    private void OnPlayerJoined(GameEvents.OnPlayerJoined joinedEvent)
+    {
+        players.Add(joinedEvent.Player);
+        Debug.Log("Player joined "+joinedEvent.Player);
     }
     private void Update()
     {

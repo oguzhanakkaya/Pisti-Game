@@ -1,14 +1,12 @@
 public class GameEvents 
 {
-    public struct SampleEvent
+    public struct OnPlayerJoined
     {
-        public int PlayerId { get; }
-        public int Score { get; }
+        public IPlayer Player;
 
-        public SampleEvent(int playerId, int score)
+        public OnPlayerJoined(IPlayer player)
         {
-            PlayerId = playerId;
-            Score = score;
+            Player = player;
         }
     }
 }

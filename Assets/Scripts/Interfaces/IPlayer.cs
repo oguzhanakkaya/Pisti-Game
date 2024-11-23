@@ -11,5 +11,6 @@ public interface IPlayer
     public List<Transform> CardPoints { get; set; }
     public UniTask TakeCard(CardObject cards);
     public void PlayCard(CardObject card);
-    
+    public void Initialize();
+
 }
