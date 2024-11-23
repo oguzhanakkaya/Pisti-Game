@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Game.Interfaces;
+using Interfaces;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;

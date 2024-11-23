@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.EventBus;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public class Player : MonoBehaviour,IPlayer
 {
@@ -12,6 +14,15 @@ public class Player : MonoBehaviour,IPlayer
     public float MoveCardTime { get => moveCardTime; set => moveCardTime = value; }
     public List<CardObject> Cards { get; set; }=new List<CardObject>();
     public List<Transform> CardPoints { get => cardPoints; set => cardPoints = value; }
+    
+    
+    private EventBus _eventBus;
+
+    [Inject]
+    public void Construct(EventBus eventBus)
+    {
+        _eventBus = eventBus;
+    }
 
     public async UniTask TakeCard(CardObject cardObject)
     {
