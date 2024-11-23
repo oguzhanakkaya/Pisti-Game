@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.EventBus;
 using Cysharp.Threading.Tasks;
+using Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -22,6 +23,16 @@ public class Player : MonoBehaviour,IPlayer
     {
         SendPlayerJoinedEvent();
     }
+    private void Update()
+    {
+        if (!IsMyTurn)
+            return;
+
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            PlayCard(null);
+        }
+    }
     private void SendPlayerJoinedEvent()
     {
         _eventBus.Fire(new GameEvents.OnPlayerJoined(this));
@@ -35,6 +46,18 @@ public class Player : MonoBehaviour,IPlayer
 
     public void PlayCard(CardObject card)
     {
-        throw new System.NotImplementedException();
+        _eventBus.Fire(new GameEvents.OnPlayerTurnCompleted(this));
+    }
+
+    public void EnterState()
+    {
+        Debug.LogError(gameObject.name + " is trying to enter state");
+        IsMyTurn = true;
+    }
+
+    public void ExitState()
+    {
+        Debug.LogError(gameObject.name + " is trying to exit state");
+        IsMyTurn = false;
     }
 }

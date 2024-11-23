@@ -10,9 +10,11 @@ public class LoadingManager : MonoBehaviour
     [SerializeField]private DeckObject deckObject;
     [SerializeField]private PlayerInstaller playerInstaller;
     [SerializeField]private CardDealer cardDealer;
+    [SerializeField]private GameManager gameManager;
     
     public void Awake()
     {
+        gameManager.Initialize();
         deckObject.Initialize();
         cardDealer.Initialize();
         playerInstaller.Initialize();
