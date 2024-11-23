@@ -7,6 +7,8 @@ public class Player : MonoBehaviour,IPlayer
 {
     [SerializeField] private float moveCardTime;
     [SerializeField] private List<Transform> cardPoints;
+    
+    public bool IsMyTurn { get; set; }
     public float MoveCardTime { get => moveCardTime; set => moveCardTime = value; }
     public List<CardObject> Cards { get; set; }=new List<CardObject>();
     public List<Transform> CardPoints { get => cardPoints; set => cardPoints = value; }

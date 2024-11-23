@@ -7,7 +7,9 @@ public class BotPlayer : MonoBehaviour,IPlayer
 {
     [SerializeField] private float moveCardTime;
     [SerializeField] private List<Transform> cardPoints;
-    
+    [SerializeField] private bool isMyTurn;
+
+    public bool IsMyTurn { get => isMyTurn; set => isMyTurn = value; }
     public float MoveCardTime { get => moveCardTime; set => moveCardTime = value; }
     public List<CardObject> Cards { get; set; }=new List<CardObject>();
     public List<Transform> CardPoints { get => cardPoints; set => cardPoints = value; }
