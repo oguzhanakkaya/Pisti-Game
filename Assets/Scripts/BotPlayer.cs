@@ -16,30 +16,22 @@ public class BotPlayer : MonoBehaviour,IPlayer
     public List<CardObject> Cards { get; set; }=new List<CardObject>();
     public List<Transform> CardPoints { get => cardPoints; set => cardPoints = value; }
     
-    
-    private EventBus _eventBus;
-    
     [Inject]
-    public void Construct(EventBus eventBus)
-    {
-        _eventBus = eventBus;
-    }
+    private EventBus _eventBus;
+
     public void Initialize()
     {
-       // SendPlayerJoinedEvent();
+        SendPlayerJoinedEvent();
     }
-
     private void SendPlayerJoinedEvent()
     {
         _eventBus.Fire(new GameEvents.OnPlayerJoined(this));
     }
-
     public async UniTask TakeCard(CardObject cardObject)
     {
         Cards.Add(cardObject);
         await cardObject.MoveCard(CardPoints[Cards.Count-1].position,MoveCardTime);
     }
-
     public void PlayCard(CardObject card)
     {
         throw new System.NotImplementedException();

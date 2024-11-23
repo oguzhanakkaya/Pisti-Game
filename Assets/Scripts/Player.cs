@@ -15,33 +15,16 @@ public class Player : MonoBehaviour,IPlayer
     public List<CardObject> Cards { get; set; }=new List<CardObject>();
     public List<Transform> CardPoints { get => cardPoints; set => cardPoints = value; }
     
-    
-    private EventBus _eventBus;
-
     [Inject]
-    public void Construct(EventBus eventBus)
-    {
-        _eventBus = eventBus;
-        
-    }
-
-    public void Update()
-    {
-        if (_eventBus != null)
-            Debug.LogError("not null");
-        else 
-            Debug.LogError("null");
-
-    }
-
+    private EventBus _eventBus;
+    
     public void Initialize()
     {
-     //   SendPlayerJoinedEvent();
+        SendPlayerJoinedEvent();
     }
     private void SendPlayerJoinedEvent()
     {
         _eventBus.Fire(new GameEvents.OnPlayerJoined(this));
-        Debug.LogError("fired");
     }
 
     public async UniTask TakeCard(CardObject cardObject)

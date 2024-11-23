@@ -16,33 +16,23 @@ public class CardDealer : MonoBehaviour
     
     private List<IPlayer> players = new List<IPlayer>();
     
-    private EventBus _eventBus;
-
     [Inject]
-    public void Construct(EventBus eventBus)
-    {
-        _eventBus = eventBus;
-    }
-    private void OnEnable()
-    {
-        _eventBus.Subscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);
-    }
-
-    private void OnDisable()
-    {
-        _eventBus.Unsubscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);
-    }
-
+    private EventBus _eventBus;
     
     public void Initialize()
     {
         cardSpriteData = Resources.Load<CardSpriteData>("CardSpriteData");
+        
+        _eventBus.Subscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);
     }
     
+    private void OnDisable()
+    {
+        _eventBus.Unsubscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);
+    }
     private void OnPlayerJoined(GameEvents.OnPlayerJoined joinedEvent)
     {
         players.Add(joinedEvent.Player);
-        Debug.Log("Player joined "+joinedEvent.Player);
     }
     private void Update()
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PlayerInstaller : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerInstaller : MonoBehaviour
     [SerializeField]private int numberOfPlayers;
     [SerializeField]private List<Vector3> playersPoints;
     
+    [Inject] private DiContainer _container;
 
     public void Initialize()
     {
@@ -17,15 +19,15 @@ public class PlayerInstaller : MonoBehaviour
 
     private void SpawnPlayers()
     {
-       IPlayer player1= Instantiate(player, playersPoints[0], Quaternion.identity);
+       IPlayer player1= _container.InstantiatePrefab(player, playersPoints[0], Quaternion.identity,null).GetComponent<IPlayer>();
        player1.Initialize();
 
        for (int i = 1; i < numberOfPlayers; i++)
        {
-           IPlayer bot= Instantiate(botPlayer, playersPoints[0], Quaternion.identity);
+           IPlayer bot= _container.InstantiatePrefab(botPlayer, playersPoints[i], Quaternion.identity,null).GetComponent<IPlayer>();
            bot.Initialize();
        }
-           
+         
     }
     
     
