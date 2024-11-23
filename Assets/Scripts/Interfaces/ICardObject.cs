@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Game.Interfaces
@@ -12,7 +13,7 @@ namespace Game.Interfaces
         void SetSprite(Sprite sprite);
         void SetCardVisibility();
         void SetValueText();
-        void MoveCard(Vector3 position,float time);
+         UniTask MoveCard(Vector3 position,float time);
     }
 }
 

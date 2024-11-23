@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4bdf284d76f72f46952e29b7a9f4719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveCardTime: 0.75
+  moveCardTime: 0.2
   cardPoints:
   - {fileID: 124319140}
   - {fileID: 1497980685}
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 956c27d34c4e31244a3d4aec713b5633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveCardTime: 0.75
+  moveCardTime: 0.2
   cardPoints:
   - {fileID: 1001402568}
   - {fileID: 511052590}

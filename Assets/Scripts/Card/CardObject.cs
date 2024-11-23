@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game.Interfaces;
 using TMPro;
@@ -41,8 +42,8 @@ public class CardObject : MonoBehaviour,ICardObject
         valueText.text = CardData.cardNumber.ToString();
     }
 
-    public void MoveCard(Vector3 position,float time)
+    public async UniTask MoveCard(Vector3 position,float time)
     {
-        transform.DOMove(position, time).SetEase(Ease.Linear);
+        await transform.DOMove(position, time).SetEase(Ease.Linear);
     }
 }

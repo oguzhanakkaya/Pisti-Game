@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -34,24 +35,24 @@ public class CardDealer : MonoBehaviour
             DealCardsToPlayers();
     }
 
-    private void DealCardsToPlayers()
+    private async void DealCardsToPlayers()
     {
         foreach (var child in players)
         {
             for (int i = 0; i < 4; i++)
             {
-                DealCard(child is Player, child);
+                await DealCard(child is Player, child);
             }
         }
     }
 
-    public void DealCard(bool isPlayer,IPlayer player)
+    public async UniTask DealCard(bool isPlayer,IPlayer player)
     {
         Card card=deckObject.deck.GetRandomCard();
         
         var obj=Instantiate(cardObject, transform.position, Quaternion.identity);
         obj.Initialize(card,cardSpriteData.GetCardSprite(card),isPlayer);
         
-        player.TakeCard(obj);
+        await player.TakeCard(obj);
     }
 }
