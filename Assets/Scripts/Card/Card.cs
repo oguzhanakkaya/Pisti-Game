@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class Card
+public struct Card
 {
     [Header("The card suit and number. 0:S, 1:H, 2:C, 3:D")]
     public int suit;

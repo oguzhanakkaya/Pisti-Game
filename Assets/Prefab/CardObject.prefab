@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -5
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: 8e42080474611d244bf838f8aad3a692, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,9 +100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8002948306391632433}
   valueText: {fileID: 5029879914000033243}
-  card:
-    suit: 0
-    cardNumber: 0
 --- !u!1 &5799687451257398870
 GameObject:
   m_ObjectHideFlags: 0

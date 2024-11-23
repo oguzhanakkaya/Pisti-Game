@@ -1,30 +1,48 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using Game.Interfaces;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class CardObject : MonoBehaviour
+public class CardObject : MonoBehaviour,ICardObject
 {
     [SerializeField]public SpriteRenderer spriteRenderer;
     [SerializeField]public TextMeshPro valueText;
-    [SerializeField]public Card card;
 
-    public void Initialize(Card card,Sprite sprite)
+    public bool IsVisible { get; set; }
+    public Card CardData { get; set; }
+
+    public void Initialize(Card cardData,Sprite sprite,bool isVisible)
     {
-        this.card = card;
+        CardData = cardData;
+        IsVisible = isVisible;
         
         SetSprite(sprite);
         SetValueText();
+        SetCardVisibility();
     }
-
-    private void SetSprite(Sprite sprite)
+    public void SetSprite(Sprite sprite)
     {
         spriteRenderer.sprite = sprite;
     }
 
-    private void SetValueText()
+    public void SetCardVisibility()
     {
-        valueText.gameObject.SetActive(card.cardNumber<10);
-        valueText.text = card.cardNumber.ToString();
+        if (!IsVisible)
+            spriteRenderer.color = Color.black;
+    }
+
+    public void SetValueText()
+    {
+        valueText.gameObject.SetActive(CardData.cardNumber<10);
+        valueText.text = CardData.cardNumber.ToString();
+    }
+
+    public void MoveCard(Vector3 position,float time)
+    {
+        transform.DOMove(position, time).SetEase(Ease.Linear);
     }
 }

@@ -11,10 +11,17 @@ public class CardDealer : MonoBehaviour
     public DeckObject deckObject;
     public CardObject cardObject;
     
+    private List<IPlayer> players = new List<IPlayer>();
+    public Player player;
+    public BotPlayer botPlayer;
+    
 
     private void Awake()
     {
         Initialize();
+        
+        players.Add(player);
+        players.Add(botPlayer);
     }
 
     private void Initialize()
@@ -24,15 +31,27 @@ public class CardDealer : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.D))
-            DealCard();
+            DealCardsToPlayers();
     }
 
-    public void DealCard()
+    private void DealCardsToPlayers()
+    {
+        foreach (var child in players)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                DealCard(child is Player, child);
+            }
+        }
+    }
+
+    public void DealCard(bool isPlayer,IPlayer player)
     {
         Card card=deckObject.deck.GetRandomCard();
         
         var obj=Instantiate(cardObject, transform.position, Quaternion.identity);
-        obj.Initialize(card,cardSpriteData.GetCardSprite(card));
-        obj.transform.DOMove(Vector3.zero, 0.5f);
+        obj.Initialize(card,cardSpriteData.GetCardSprite(card),isPlayer);
+        
+        player.TakeCard(obj);
     }
 }
