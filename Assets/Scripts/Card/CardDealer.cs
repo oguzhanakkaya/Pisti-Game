@@ -38,7 +38,8 @@ public class CardDealer : MonoBehaviour
     }
     public async void DealCardsToPlayers()
     {
-        await UniTask.DelayFrame(100);
+        await UniTask.DelayFrame(50);
+        
         foreach (var child in _players)
             for (int i = 0; i < 4; i++)
                 await DealCard(child is Player, child);
