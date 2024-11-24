@@ -349,6 +349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardObject: {fileID: 3723670039178185798, guid: 3b1dc3f1031afcc4d8dc9901d8716535, type: 3}
+  deckSprite: {fileID: 686998594}
 --- !u!1 &704035573
 GameObject:
   m_ObjectHideFlags: 0

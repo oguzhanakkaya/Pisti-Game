@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -2
-  m_Sprite: {fileID: 21300000, guid: 8e42080474611d244bf838f8aad3a692, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2981d2474c23dda4488d7f3d7e2f82a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 8002948306391632433}
   valueText: {fileID: 5029879914000033243}
+  redColor: {r: 0.8352942, g: 0.3254902, b: 0.5568628, a: 1}
+  blackColor: {r: 0.18823531, g: 0.20000002, b: 0.34117648, a: 1}
 --- !u!1 &5799687451257398870
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7935377269266259047
 RectTransform:
   m_ObjectHideFlags: 0
@@ -134,8 +136,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.4217, y: 0.6549}
-  m_SizeDelta: {x: 0.3228, y: 0.8259}
+  m_AnchoredPosition: {x: -0.2232, y: 0.6549}
+  m_SizeDelta: {x: 0.6154, y: 0.8259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &617800732380223340
 MeshRenderer:
@@ -226,14 +228,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 4.95
-  m_fontSizeBase: 36
+  m_fontSize: 5
+  m_fontSizeBase: 5
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

@@ -8,6 +8,7 @@ using Zenject;
 public class CardDealer : MonoBehaviour
 {
     [SerializeField]private CardObject cardObject;
+    [SerializeField]private SpriteRenderer deckSprite;
     
     private List<IPlayer> _players = new List<IPlayer>();
     
@@ -36,10 +37,21 @@ public class CardDealer : MonoBehaviour
     public async UniTask DealCardsToPlayers()
     {
         await UniTask.DelayFrame(50);
+
+        if (_drawPile.deck.cards.Count==0)
+        {
+            _eventBus.Fire(new GameEvents.OnGameFinish());
+            return;
+        }
         
         foreach (var child in _players)
             for (int i = 0; i < 4; i++)
                 await DealCard(child is Player, child);
+
+        if (_drawPile.deck.cards.Count == 0)
+        {
+            deckSprite.enabled = false;
+        }
     }
     public async UniTask DealCardsToCenter()
     {

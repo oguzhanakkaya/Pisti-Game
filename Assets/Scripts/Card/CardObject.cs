@@ -12,6 +12,8 @@ public class CardObject : MonoBehaviour,ICardObject
 {
     [SerializeField]public SpriteRenderer spriteRenderer;
     [SerializeField]public TextMeshPro valueText;
+    [SerializeField]public Color redColor;
+    [SerializeField]public Color blackColor;
 
     public bool IsVisible { get; set; }
     public Card CardData { get; set; }
@@ -23,6 +25,7 @@ public class CardObject : MonoBehaviour,ICardObject
         
         SetSprite(sprite);
         SetValueText();
+        SetValueTextColor();
         SetCardVisibility();
     }
     public void SetSprite(Sprite sprite)
@@ -34,12 +37,23 @@ public class CardObject : MonoBehaviour,ICardObject
     {
         if (!IsVisible)
             spriteRenderer.color = Color.black;
+        else
+            spriteRenderer.color = Color.white;
+        
+        valueText.gameObject.SetActive(CardData.cardNumber<10 && IsVisible);
     }
 
     public void SetValueText()
     {
-        valueText.gameObject.SetActive(CardData.cardNumber<10);
-        valueText.text = CardData.cardNumber.ToString();
+        valueText.text = (CardData.cardNumber+1).ToString();
+    }
+
+    public void SetValueTextColor()
+    {
+        if (CardData.suit==0 || CardData.suit==2)
+            valueText.color = blackColor;
+        else 
+            valueText.color = redColor;
     }
 
     public void SetLayer(int layer)

@@ -22,6 +22,8 @@ namespace Jobs
         }
         public override async UniTask ExecuteAsync(CancellationToken cancellationToken = default)
         {
+            await UniTask.Delay(500);
+            
             List<UniTask> moveTasks = new List<UniTask>();
 
             foreach (var obj in _cardObjects)

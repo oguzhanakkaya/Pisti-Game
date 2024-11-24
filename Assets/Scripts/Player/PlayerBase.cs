@@ -51,6 +51,7 @@ public class PlayerBase : MonoBehaviour,IPlayer
     }
     public void PlayCard(CardObject card)
     {
+        Cards.Remove(card);
         IsMyTurn = false;
         _eventBus.Fire(new GameEvents.OnPlayerPlayCard(this,card));
         
@@ -71,11 +72,17 @@ public class PlayerBase : MonoBehaviour,IPlayer
     public void EnterState()
     {
         IsMyTurn = true;
-        PlayCard();
+
+        if (Cards.Count == 0)
+        {
+            _eventBus.Fire(new GameEvents.OnCardsFinish(this));
+            return;
+        }
         
+        Play();
     }
 
-    public virtual void PlayCard()
+    public virtual void Play()
     {
         
     }

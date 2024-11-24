@@ -12,8 +12,7 @@ public class DiscardPile : MonoBehaviour
 {
     [SerializeField]private float offsetValue;
     [SerializeField]private float cardMoveSpeed;
-    
-    private Stack<CardObject> _discardPileStack = new Stack<CardObject>();
+    [SerializeField]private Stack<CardObject> _discardPileStack = new Stack<CardObject>();
     
     [Inject]private EventBus _eventBus;
     
@@ -51,8 +50,9 @@ public class DiscardPile : MonoBehaviour
             await gainedCardJob.ExecuteAsync();
             
             player.AddScore(cardCount,GetScore());
+            
+            _discardPileStack.Clear();
         }
-        
         player.SendTurnCompletedEvent();
     }
     private bool HasMatch(CardObject cardObject)

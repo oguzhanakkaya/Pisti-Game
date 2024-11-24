@@ -11,6 +11,15 @@ public class GameEvents
             Player = player;
         }
     }
+    public struct OnCardsFinish
+    {
+        public IGameState Player;
+
+        public OnCardsFinish(IGameState player)
+        {
+            Player = player;
+        }
+    }
     public struct OnPlayerTurnCompleted
     {
         public IGameState Player;
@@ -31,4 +40,5 @@ public class GameEvents
             Card = card;
         }
     }
+    public struct OnGameFinish {}
 }

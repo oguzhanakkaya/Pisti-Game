@@ -20,14 +20,14 @@ public class PlayerInstaller : MonoBehaviour
 
     private void SpawnPlayers()
     {
-       IPlayer player1= _container.InstantiatePrefab(player, playersPoints[0], Quaternion.identity,null).GetComponent<IPlayer>();
-       player1.Initialize();
-
        for (int i = 1; i < _gameManager.numberOfPlayers; i++)
        {
            IPlayer bot= _container.InstantiatePrefab(botPlayer, playersPoints[i], Quaternion.identity,null).GetComponent<IPlayer>();
            bot.Initialize();
        }
+       IPlayer player1= _container.InstantiatePrefab(player, playersPoints[0], Quaternion.identity,null).GetComponent<IPlayer>();
+       player1.Initialize();
+
          
     }
     

@@ -18,11 +18,18 @@ public class GameManager : MonoBehaviour
 
     private IGameState _currentState;
     private int _currentPlayerIndex;
-    
+
+    private void Update()
+    {
+        Debug.LogError(_currentState.GetType().Name);
+    }
+
     public void Initialize()
     {
         _eventBus.Subscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);
         _eventBus.Subscribe<GameEvents.OnPlayerTurnCompleted>(OnPlayerTurnCompleted);
+        _eventBus.Subscribe<GameEvents.OnCardsFinish>(OnCardsFinish);
+        _eventBus.Subscribe<GameEvents.OnGameFinish>(OnGameFinished);
 
         _currentPlayerIndex = 0;
     }
@@ -30,11 +37,29 @@ public class GameManager : MonoBehaviour
     {
         _eventBus.Unsubscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);
         _eventBus.Unsubscribe<GameEvents.OnPlayerTurnCompleted>(OnPlayerTurnCompleted);
+        _eventBus.Unsubscribe<GameEvents.OnCardsFinish>(OnCardsFinish);
+        _eventBus.Unsubscribe<GameEvents.OnGameFinish>(OnGameFinished);
     }
     private void OnPlayerJoined(GameEvents.OnPlayerJoined joinedEvent)
     {
        _playersTurnStates.Add(joinedEvent.Player);
        CheckEnoughPlayers();
+    }
+    private async void OnCardsFinish(GameEvents.OnCardsFinish cardsFinishEvent)
+    {
+        if (cardsFinishEvent.Player!=_playersTurnStates[0])
+            return;
+        
+        _currentState?.ExitState();
+        await _cardDealer.DealCardsToPlayers();
+        _currentState = _playersTurnStates[_currentPlayerIndex];
+        _currentState.EnterState();
+
+    }
+
+    private void OnGameFinished(GameEvents.OnGameFinish gameFinishEvent)
+    {
+        Debug.LogError("GameFinish");
     }
     private void OnPlayerTurnCompleted(GameEvents.OnPlayerTurnCompleted turnCompletedEvent)
     {
