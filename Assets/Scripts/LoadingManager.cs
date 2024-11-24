@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.EventBus;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Zenject;
 
 public class LoadingManager : MonoBehaviour
 {
-    [SerializeField]private DeckObject deckObject;
+    [SerializeField]private DrawPile drawPile;
+    [SerializeField]private DiscardPile discardPile;
     [SerializeField]private PlayerInstaller playerInstaller;
     [SerializeField]private CardDealer cardDealer;
     [SerializeField]private GameManager gameManager;
@@ -15,7 +11,8 @@ public class LoadingManager : MonoBehaviour
     public void Awake()
     {
         gameManager.Initialize();
-        deckObject.Initialize();
+        drawPile.Initialize();
+        discardPile.Initialize();
         cardDealer.Initialize();
         playerInstaller.Initialize();
     }

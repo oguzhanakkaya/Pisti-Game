@@ -13,6 +13,7 @@ namespace Interfaces
         public UniTask TakeCard(CardObject cards);
         public void PlayCard(CardObject card);
         public void Initialize();
+        public void SendTurnCompletedEvent();
 
     }
 }

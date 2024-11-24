@@ -1,28 +1,24 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.EventBus;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using Interfaces;
 using UnityEngine;
 using Zenject;
 
 public class CardDealer : MonoBehaviour
 {
-    public CardSpriteData cardSpriteData;
-    
-    public DeckObject deckObject;
-    public CardObject cardObject;
+    [SerializeField]private CardObject cardObject;
     
     private List<IPlayer> _players = new List<IPlayer>();
     
-    [Inject]
-    private EventBus _eventBus;
+    [Inject]private EventBus _eventBus;
+    [Inject]private DrawPile _drawPile;
+    
+    private CardSpriteData _cardSpriteData;
     
     public void Initialize()
     {
-        cardSpriteData = Resources.Load<CardSpriteData>("CardSpriteData");
+        _cardSpriteData = Resources.Load<CardSpriteData>("CardSpriteData");
         
         _eventBus.Subscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);
         
@@ -47,10 +43,10 @@ public class CardDealer : MonoBehaviour
 
     public async UniTask DealCard(bool isPlayer,IPlayer player)
     {
-        Card card=deckObject.deck.GetRandomCard();
+        Card card=_drawPile.deck.GetRandomCard();
         
         var obj=Instantiate(cardObject, transform.position, Quaternion.identity);
-        obj.Initialize(card,cardSpriteData.GetCardSprite(card),isPlayer);
+        obj.Initialize(card,_cardSpriteData.GetCardSprite(card),isPlayer);
         
         await player.TakeCard(obj);
     }

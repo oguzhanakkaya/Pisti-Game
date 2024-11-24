@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class DeckObject : MonoBehaviour
+public class DrawPile : MonoBehaviour
 {
     public Deck deck;
 

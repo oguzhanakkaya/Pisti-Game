@@ -16,8 +16,7 @@ public class PlayerBase : MonoBehaviour,IPlayer
     public List<CardObject> Cards { get; set; }=new List<CardObject>();
     public List<Transform> CardPoints { get => cardPoints; set => cardPoints = value; }
     
-    [Inject]
-    private EventBus _eventBus;
+    [Inject]private EventBus _eventBus;
     
     public void Initialize()
     {
@@ -37,27 +36,28 @@ public class PlayerBase : MonoBehaviour,IPlayer
     {
         _eventBus.Fire(new GameEvents.OnPlayerJoined(this));
     }
-
     public async UniTask TakeCard(CardObject cardObject)
     {
         Cards.Add(cardObject);
         await cardObject.MoveCard(CardPoints[Cards.Count-1].position,MoveCardTime);
     }
-
     public void PlayCard(CardObject card)
+    {
+        IsMyTurn = false;
+        _eventBus.Fire(new GameEvents.OnPlayerPlayCard(this,card));
+        
+    }
+    public void SendTurnCompletedEvent()
     {
         _eventBus.Fire(new GameEvents.OnPlayerTurnCompleted(this));
     }
 
     public void EnterState()
     {
-        Debug.LogError(gameObject.name + " is trying to enter state");
         IsMyTurn = true;
     }
-
     public void ExitState()
     {
-        Debug.LogError(gameObject.name + " is trying to exit state");
-        IsMyTurn = false;
+       
     }
 }

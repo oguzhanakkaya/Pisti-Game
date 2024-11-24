@@ -20,4 +20,15 @@ public class GameEvents
             Player = player;
         }
     }
+    public struct OnPlayerPlayCard
+    {
+        public IPlayer Player;
+        public CardObject Card;
+
+        public OnPlayerPlayCard(IPlayer player,CardObject card)
+        {
+            Player = player;
+            Card = card;
+        }
+    }
 }
