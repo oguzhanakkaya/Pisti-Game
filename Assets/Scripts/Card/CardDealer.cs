@@ -17,6 +17,7 @@ public class CardDealer : MonoBehaviour
     [Inject]private DiscardPile _discardPile;
     
     private CardSpriteData _cardSpriteData;
+    private bool _isCardsFinished;
     
     public void Initialize()
     {
@@ -38,9 +39,10 @@ public class CardDealer : MonoBehaviour
     {
         await UniTask.DelayFrame(50);
 
-        if (_drawPile.deck.cards.Count==0)
+        if (_isCardsFinished)
         {
             _eventBus.Fire(new GameEvents.OnGameFinish());
+            await UniTask.DelayFrame(50);
             return;
         }
         
@@ -50,6 +52,7 @@ public class CardDealer : MonoBehaviour
 
         if (_drawPile.deck.cards.Count == 0)
         {
+            _isCardsFinished = true;
             deckSprite.enabled = false;
         }
     }

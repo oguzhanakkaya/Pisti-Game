@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     private IGameState _currentStatePlayer;
     private int _currentPlayerIndex;
+    private bool _isGameFinished;
     public void Initialize()
     {
         _eventBus.Subscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);
@@ -47,13 +48,17 @@ public class GameManager : MonoBehaviour
         
         _currentStatePlayer?.ExitState();
         await _cardDealer.DealCardsToPlayers();
+
+        if (_isGameFinished)
+            return;
+        
         _currentStatePlayer = _players[_currentPlayerIndex];
         _currentStatePlayer.EnterState();
-
     }
 
     private void OnGameFinished(GameEvents.OnGameFinish gameFinishEvent)
     {
+        _isGameFinished = true;
         CalculateGainedCards();
     }
     private void OnPlayerTurnCompleted(GameEvents.OnPlayerTurnCompleted turnCompletedEvent)
@@ -87,18 +92,14 @@ public class GameManager : MonoBehaviour
         _currentStatePlayer = _players[_currentPlayerIndex];
         _currentStatePlayer.EnterState();
     }
-
     private void CalculateGainedCards()
     {
-        _players.OrderBy(p => ((IPlayer)p).GainedCardsCount);
-        
         IPlayer firstPlayer = (IPlayer)_players[0];
         IPlayer secondPlayer = (IPlayer)_players[1];
         
-        
         if (firstPlayer.GainedCardsCount>secondPlayer.GainedCardsCount)
-        {
             firstPlayer.AddScore(0,3);
-        }
+        else
+            secondPlayer.AddScore(0,3);
     }
 }

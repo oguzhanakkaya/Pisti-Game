@@ -7,6 +7,7 @@ public class LoadingManager : MonoBehaviour
     [SerializeField]private PlayerInstaller playerInstaller;
     [SerializeField]private CardDealer cardDealer;
     [SerializeField]private GameManager gameManager;
+    [SerializeField]private GameOverPanel gameOverPanel;
     
     public void Awake()
     {
@@ -15,5 +16,6 @@ public class LoadingManager : MonoBehaviour
         discardPile.Initialize();
         cardDealer.Initialize();
         playerInstaller.Initialize();
+        gameOverPanel.Initialize();
     }
 }

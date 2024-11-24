@@ -11,6 +11,17 @@ public class GameEvents
             Player = player;
         }
     }
+    public struct OnScoreCalculated
+    {
+        public string PlayerName;
+        public string Score;
+
+        public OnScoreCalculated(string playerName, string score)
+        {
+            PlayerName = playerName;
+            Score = score;
+        }
+    }
     public struct OnCardsFinish
     {
         public IGameState Player;
