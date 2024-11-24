@@ -11,12 +11,15 @@ using UnityEngine.Serialization;
 public class CardObject : MonoBehaviour,ICardObject
 {
     [SerializeField]public SpriteRenderer spriteRenderer;
+    [SerializeField]public BoxCollider2D boxCollider;
     [SerializeField]public TextMeshPro valueText;
     [SerializeField]public Color redColor;
     [SerializeField]public Color blackColor;
+    [SerializeField]public Card cardObje;
 
     public bool IsVisible { get; set; }
-    public Card CardData { get; set; }
+   // public Card CardData { get; set; }
+    public Card CardData {  get => cardObje; set => cardObje = value; }
 
     public void Initialize(Card cardData,Sprite sprite,bool isVisible)
     {
@@ -42,7 +45,6 @@ public class CardObject : MonoBehaviour,ICardObject
         
         valueText.gameObject.SetActive(CardData.cardNumber<10 && IsVisible);
     }
-
     public void SetValueText()
     {
         valueText.text = (CardData.cardNumber+1).ToString();

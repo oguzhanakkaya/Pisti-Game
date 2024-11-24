@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8144024420168309286}
   - component: {fileID: 8002948306391632433}
   - component: {fileID: 3723670039178185798}
+  - component: {fileID: 5568793734564626169}
   m_Layer: 0
   m_Name: CardObject
   m_TagString: Untagged
@@ -102,6 +103,51 @@ MonoBehaviour:
   valueText: {fileID: 5029879914000033243}
   redColor: {r: 0.8352942, g: 0.3254902, b: 0.5568628, a: 1}
   blackColor: {r: 0.18823531, g: 0.20000002, b: 0.34117648, a: 1}
+--- !u!61 &5568793734564626169
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994062765728489494}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.2206249, y: 1.8599999}
+    newSize: {x: 0.3025, y: 0.44}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2206249, y: 1.8599999}
+  m_EdgeRadius: 0
 --- !u!1 &5799687451257398870
 GameObject:
   m_ObjectHideFlags: 0

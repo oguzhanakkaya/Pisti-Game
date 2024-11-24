@@ -82,9 +82,9 @@ public class DiscardPile : MonoBehaviour
 
             if (card.CardData.cardNumber == 0) // If Card Number 1
                 score += 1;
-            else if (card.CardData.cardNumber == 2 && card.CardData.suit==2) // If Card Club-2
+            else if (card.CardData.cardNumber == 1 && card.CardData.suit==2) // If Card Club-2
                 score += 2;
-            else if (card.CardData.cardNumber == 10 && card.CardData.suit == 3) // If Card Diamond-10
+            else if (card.CardData.cardNumber == 9 && card.CardData.suit == 3) // If Card Diamond-10
                 score += 3;
             else if (card.CardData.cardNumber==10) // If Card Jackpot
                 score += 1;

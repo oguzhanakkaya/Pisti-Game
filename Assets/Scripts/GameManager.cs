@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Interfaces;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,16 +15,10 @@ public class GameManager : MonoBehaviour
     [Inject] private EventBus _eventBus;
     [Inject] private CardDealer _cardDealer;
     
-    private List<IGameState> _playersTurnStates = new List<IGameState>();
+    private List<IGameState> _players = new List<IGameState>();
 
-    private IGameState _currentState;
+    private IGameState _currentStatePlayer;
     private int _currentPlayerIndex;
-
-    private void Update()
-    {
-        Debug.LogError(_currentState.GetType().Name);
-    }
-
     public void Initialize()
     {
         _eventBus.Subscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);
@@ -42,35 +37,35 @@ public class GameManager : MonoBehaviour
     }
     private void OnPlayerJoined(GameEvents.OnPlayerJoined joinedEvent)
     {
-       _playersTurnStates.Add(joinedEvent.Player);
+       _players.Add(joinedEvent.Player);
        CheckEnoughPlayers();
     }
     private async void OnCardsFinish(GameEvents.OnCardsFinish cardsFinishEvent)
     {
-        if (cardsFinishEvent.Player!=_playersTurnStates[0])
+        if (cardsFinishEvent.Player!=_players[0])
             return;
         
-        _currentState?.ExitState();
+        _currentStatePlayer?.ExitState();
         await _cardDealer.DealCardsToPlayers();
-        _currentState = _playersTurnStates[_currentPlayerIndex];
-        _currentState.EnterState();
+        _currentStatePlayer = _players[_currentPlayerIndex];
+        _currentStatePlayer.EnterState();
 
     }
 
     private void OnGameFinished(GameEvents.OnGameFinish gameFinishEvent)
     {
-        Debug.LogError("GameFinish");
+        CalculateGainedCards();
     }
     private void OnPlayerTurnCompleted(GameEvents.OnPlayerTurnCompleted turnCompletedEvent)
     {
-        if (turnCompletedEvent.Player !=_currentState)
+        if (turnCompletedEvent.Player !=_currentStatePlayer)
             return;
         
         SwitchState();
     }
     private void CheckEnoughPlayers()
     {
-        if (_playersTurnStates.Count==numberOfPlayers)
+        if (_players.Count==numberOfPlayers)
             StartGame();
     }
     private async void StartGame()
@@ -78,18 +73,33 @@ public class GameManager : MonoBehaviour
         await _cardDealer.DealCardsToCenter();
         await _cardDealer.DealCardsToPlayers();
         
-        _currentState = _playersTurnStates[_currentPlayerIndex];
-        _currentState.EnterState();
+        _currentStatePlayer = _players[_currentPlayerIndex];
+        _currentStatePlayer.EnterState();
     }
     private void SwitchState()
     {
-        _currentState?.ExitState();
+        _currentStatePlayer?.ExitState();
         
         _currentPlayerIndex++;
-        if (_currentPlayerIndex>=_playersTurnStates.Count)
+        if (_currentPlayerIndex>=_players.Count)
             _currentPlayerIndex = 0;
         
-        _currentState = _playersTurnStates[_currentPlayerIndex];
-        _currentState.EnterState();
+        _currentStatePlayer = _players[_currentPlayerIndex];
+        _currentStatePlayer.EnterState();
+    }
+
+    private void CalculateGainedCards()
+    {
+        _players.OrderByDescending(p => ((IPlayer)p).GainedCardsCount);
+        
+        IPlayer firstPlayer = (IPlayer)_players[0];
+        IPlayer secondPlayer = (IPlayer)_players[1];
+        
+        Debug.LogError(firstPlayer.GainedCardsCount + " cards " + secondPlayer.GainedCardsCount);
+
+        if (firstPlayer.GainedCardsCount>secondPlayer.GainedCardsCount)
+        {
+            firstPlayer.AddScore(0,3);
+        }
     }
 }
