@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.EventBus;
 using TMPro;
 using UnityEngine;
@@ -28,9 +26,8 @@ public class GameOverPanel : MonoBehaviour
     {
         panel.SetActive(true);
         
-        informationText.text = "Winner: "+evt.PlayerName+"\nScore: "+evt.Score;
+        informationText.text = "Winner: "+evt.PlayerName+"\nScore: "+evt.Score.ToString();
     }
-
     private void ContinueButtonClicked()
     {
         continueButton.enabled = false;

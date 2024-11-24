@@ -14,9 +14,9 @@ public class GameEvents
     public struct OnScoreCalculated
     {
         public string PlayerName;
-        public string Score;
+        public int Score;
 
-        public OnScoreCalculated(string playerName, string score)
+        public OnScoreCalculated(string playerName, int score)
         {
             PlayerName = playerName;
             Score = score;

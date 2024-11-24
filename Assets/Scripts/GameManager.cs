@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Interfaces;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 using EventBus = System.EventBus.EventBus;
@@ -16,7 +12,6 @@ public class GameManager : MonoBehaviour
     [Inject] private CardDealer _cardDealer;
     
     private List<IGameState> _players = new List<IGameState>();
-
     private IGameState _currentStatePlayer;
     private int _currentPlayerIndex;
     private bool _isGameFinished;
@@ -60,6 +55,9 @@ public class GameManager : MonoBehaviour
     {
         _isGameFinished = true;
         CalculateGainedCards();
+
+        IPlayer winner = GetWinner();
+        _eventBus.Fire(new GameEvents.OnScoreCalculated(winner.PlayerName, winner.Score));
     }
     private void OnPlayerTurnCompleted(GameEvents.OnPlayerTurnCompleted turnCompletedEvent)
     {
@@ -94,12 +92,22 @@ public class GameManager : MonoBehaviour
     }
     private void CalculateGainedCards()
     {
+        _players.Sort((a, b) => ((IPlayer)b).GainedCardsCount.CompareTo(((IPlayer)a).GainedCardsCount));
+        
         IPlayer firstPlayer = (IPlayer)_players[0];
         IPlayer secondPlayer = (IPlayer)_players[1];
         
+        Debug.LogError(firstPlayer.GainedCardsCount + " " + secondPlayer.GainedCardsCount);
+        
         if (firstPlayer.GainedCardsCount>secondPlayer.GainedCardsCount)
             firstPlayer.AddScore(0,3);
-        else
-            secondPlayer.AddScore(0,3);
+
+    }
+    private IPlayer GetWinner()
+    {
+        _players.Sort((a, b) => ((IPlayer)b).Score.CompareTo(((IPlayer)a).Score));
+        
+        return (IPlayer)_players[0];
+
     }
 }

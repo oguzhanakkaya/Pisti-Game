@@ -66,7 +66,6 @@ public class CardDealer : MonoBehaviour
         await DealCard(true);
            
     }
-
     private async UniTask DealCard(bool isPlayer,IPlayer player)
     {
         Card card=_drawPile.deck.GetRandomCard();

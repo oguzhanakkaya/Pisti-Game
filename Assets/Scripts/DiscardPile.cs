@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.EventBus;
 using System.Linq;
@@ -12,7 +11,8 @@ public class DiscardPile : MonoBehaviour
 {
     [SerializeField]private float offsetValue;
     [SerializeField]private float cardMoveSpeed;
-    [SerializeField]private Stack<CardObject> _discardPileStack = new Stack<CardObject>();
+    
+    private Stack<CardObject> _discardPileStack = new Stack<CardObject>();
     
     [Inject]private EventBus _eventBus;
 
