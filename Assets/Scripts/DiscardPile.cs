@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.EventBus;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Interfaces;
+using Jobs;
 using UnityEngine;
 using Zenject;
 
@@ -36,9 +38,15 @@ public class DiscardPile : MonoBehaviour
         var hasMatch = HasMatch(cardObject);
         _discardPileStack.Push(cardObject);
 
+        MoveGainedCardJob gainedCardJob = new MoveGainedCardJob(_discardPileStack.ToList(),player);
+
         if (hasMatch)
         {
-            int cardNumber = _discardPileStack.Count;
+            int cardCount = _discardPileStack.Count;
+            
+            await gainedCardJob.ExecuteAsync();
+            
+            player.AddScore(cardCount,GetScore());
         }
         
         player.SendTurnCompletedEvent();

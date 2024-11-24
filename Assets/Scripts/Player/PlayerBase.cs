@@ -9,10 +9,13 @@ using Zenject;
 public class PlayerBase : MonoBehaviour,IPlayer
 {
     [SerializeField] private float moveCardTime;
+    [SerializeField] private int numberOfGainedCards;
     [SerializeField] private List<Transform> cardPoints;
-    
+
+    public Transform Transform { get => transform; }
     public bool IsMyTurn { get; set; }
     public float MoveCardTime { get => moveCardTime; set => moveCardTime = value; }
+    public int Score { get; set; }
     public List<CardObject> Cards { get; set; }=new List<CardObject>();
     public List<Transform> CardPoints { get => cardPoints; set => cardPoints = value; }
     
@@ -50,6 +53,12 @@ public class PlayerBase : MonoBehaviour,IPlayer
     public void SendTurnCompletedEvent()
     {
         _eventBus.Fire(new GameEvents.OnPlayerTurnCompleted(this));
+    }
+
+    public void AddScore(int numberOfCards, int score)
+    {
+        numberOfGainedCards += numberOfCards;
+        Score+=score;
     }
 
     public void EnterState()
