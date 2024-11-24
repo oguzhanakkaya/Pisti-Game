@@ -13,7 +13,9 @@ public class PlayerBase : MonoBehaviour,IPlayer
     [SerializeField] private List<Transform> cardPoints;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private string playerName;
 
+    public string PlayerName { get => playerName; set => playerName = value; }
     public Transform Transform { get => transform; }
     public bool IsMyTurn { get; set; }
     public float MoveCardTime { get => moveCardTime; set => moveCardTime = value; }
@@ -83,7 +85,7 @@ public class PlayerBase : MonoBehaviour,IPlayer
         Play();
     }
 
-    public virtual void Play()
+    internal virtual void Play()
     {
         
     }
@@ -94,7 +96,7 @@ public class PlayerBase : MonoBehaviour,IPlayer
 
     private void SetPlayerNameText()
     {
-        nameText.text = gameObject.name;
+        nameText.text = PlayerName;
     }
     private void SetPlayerScoreText()
     {

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerInputController : MonoBehaviour
 {
-    [SerializeField] private Player player;
+    [FormerlySerializedAs("user")] [SerializeField] private Player player;
     void Update()
     {
         if (!player.IsMyTurn)

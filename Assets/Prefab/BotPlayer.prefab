@@ -180,7 +180,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveCardTime: 0.2
-  numberOfGainedCards: 0
   cardPoints:
   - {fileID: 5245491621384620747}
   - {fileID: 4878319264931160681}
@@ -188,6 +187,7 @@ MonoBehaviour:
   - {fileID: 4728789123527210263}
   nameText: {fileID: 2721762409810655249}
   scoreText: {fileID: 8823853380996364075}
+  playerName: Bot
 --- !u!1 &3430420848777302107
 GameObject:
   m_ObjectHideFlags: 0

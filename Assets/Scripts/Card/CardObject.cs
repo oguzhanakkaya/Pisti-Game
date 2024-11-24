@@ -18,8 +18,7 @@ public class CardObject : MonoBehaviour,ICardObject
     [SerializeField]public Card cardObje;
 
     public bool IsVisible { get; set; }
-   // public Card CardData { get; set; }
-    public Card CardData {  get => cardObje; set => cardObje = value; }
+    public Card CardData { get; set; }
 
     public void Initialize(Card cardData,Sprite sprite,bool isVisible)
     {

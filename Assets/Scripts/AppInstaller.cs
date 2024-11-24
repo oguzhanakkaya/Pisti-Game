@@ -1,11 +1,12 @@
 using System.EventBus;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 public class AppInstaller : MonoInstaller
 {
-    [SerializeField]private Player playerPrefab;
+    [FormerlySerializedAs("userPrefab")] [SerializeField]private Player playerPrefab;
     [SerializeField]private BotPlayer botPlayerPrefab;
     [SerializeField]private GameManager gameManager;
     [SerializeField]private CardDealer cardDealer;

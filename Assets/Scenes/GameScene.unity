@@ -639,6 +639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offsetValue: 0.4
   cardMoveSpeed: 0.2
+  currentCenterScore: 0
 --- !u!4 &1226000017
 Transform:
   m_ObjectHideFlags: 0

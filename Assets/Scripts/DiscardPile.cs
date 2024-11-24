@@ -15,6 +15,8 @@ public class DiscardPile : MonoBehaviour
     [SerializeField]private Stack<CardObject> _discardPileStack = new Stack<CardObject>();
     
     [Inject]private EventBus _eventBus;
+
+    public int currentCenterScore;
     
     public void Initialize()
     {
@@ -35,23 +37,23 @@ public class DiscardPile : MonoBehaviour
         cardObject.SetLayer(_discardPileStack.Count);
         await cardObject.MoveCard(GetRandomPoint(), cardMoveSpeed);
         
+        CheckCardHasScore(cardObject);
+        
         var hasMatch = HasMatch(cardObject);
         _discardPileStack.Push(cardObject);
         
         if (player==null)
             return;
-
-        MoveGainedCardJob gainedCardJob = new MoveGainedCardJob(_discardPileStack.ToList(),player);
-
+        
         if (hasMatch)
         {
-            int cardCount = _discardPileStack.Count;
-            
+            MoveGainedCardJob gainedCardJob = new MoveGainedCardJob(_discardPileStack.ToList(),player);
             await gainedCardJob.ExecuteAsync();
             
-            player.AddScore(cardCount,GetScore());
+            player.AddScore( _discardPileStack.Count,GetScore());
             
             _discardPileStack.Clear();
+            currentCenterScore = 0;
         }
         player.SendTurnCompletedEvent();
     }
@@ -69,27 +71,24 @@ public class DiscardPile : MonoBehaviour
         return false;
     }
 
+    private void CheckCardHasScore(CardObject cardObject)
+    {
+        if (cardObject.CardData.cardNumber == 0) // If Card Number 1
+            currentCenterScore += 1;
+        else if (cardObject.CardData.cardNumber == 1 && cardObject.CardData.suit==2) // If Card Club-2
+            currentCenterScore += 2;
+        else if (cardObject.CardData.cardNumber == 9 && cardObject.CardData.suit == 3) // If Card Diamond-10
+            currentCenterScore += 3;
+        else if (cardObject.CardData.cardNumber==10) // If Card Jackpot
+            currentCenterScore += 1;
+    }
     private int GetScore()
     {
-        int score = 0;
-
         if (_discardPileStack.Count == 2)  // Is Pisti
-            score += 10;
-
-        for (int i = 0; i < _discardPileStack.Count; i++)
-        {
-            var card= _discardPileStack.Pop();
-
-            if (card.CardData.cardNumber == 0) // If Card Number 1
-                score += 1;
-            else if (card.CardData.cardNumber == 1 && card.CardData.suit==2) // If Card Club-2
-                score += 2;
-            else if (card.CardData.cardNumber == 9 && card.CardData.suit == 3) // If Card Diamond-10
-                score += 3;
-            else if (card.CardData.cardNumber==10) // If Card Jackpot
-                score += 1;
-        }
-        return score;
+            currentCenterScore += 10;
+        
+        return currentCenterScore;
+        
     }
     private Vector3 GetRandomPoint()
     {

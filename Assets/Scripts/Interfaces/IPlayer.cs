@@ -6,6 +6,7 @@ namespace Interfaces
 {
     public interface IPlayer:IGameState
     {
+        public string PlayerName { get; set; }
         Transform Transform { get; }
         public bool IsMyTurn { get; set; }
         public float MoveCardTime { get; set; }

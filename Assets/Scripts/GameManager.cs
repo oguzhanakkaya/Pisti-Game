@@ -90,13 +90,12 @@ public class GameManager : MonoBehaviour
 
     private void CalculateGainedCards()
     {
-        _players.OrderByDescending(p => ((IPlayer)p).GainedCardsCount);
+        _players.OrderBy(p => ((IPlayer)p).GainedCardsCount);
         
         IPlayer firstPlayer = (IPlayer)_players[0];
         IPlayer secondPlayer = (IPlayer)_players[1];
         
-        Debug.LogError(firstPlayer.GainedCardsCount + " cards " + secondPlayer.GainedCardsCount);
-
+        
         if (firstPlayer.GainedCardsCount>secondPlayer.GainedCardsCount)
         {
             firstPlayer.AddScore(0,3);

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BotPlayer : PlayerBase
 {
-    public override void Play()
+    internal override void Play()
     {
         base.Play();
         PlayRandomCard();

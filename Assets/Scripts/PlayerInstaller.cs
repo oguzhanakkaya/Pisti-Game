@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 public class PlayerInstaller : MonoBehaviour
 {
-    [SerializeField]private Player player;
+    [FormerlySerializedAs("user")] [SerializeField]private Player player;
     [SerializeField]private BotPlayer botPlayer;
     [SerializeField]private List<Vector3> playersPoints;
     

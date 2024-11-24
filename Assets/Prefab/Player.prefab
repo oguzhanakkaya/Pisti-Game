@@ -145,7 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveCardTime: 0.2
-  numberOfGainedCards: 0
   cardPoints:
   - {fileID: 6151690288396792968}
   - {fileID: 1032721976573524572}
@@ -153,6 +152,7 @@ MonoBehaviour:
   - {fileID: 1154966313568385007}
   nameText: {fileID: 7438442777944852760}
   scoreText: {fileID: 4074512810771842594}
+  playerName: Player
 --- !u!114 &769867729817275399
 MonoBehaviour:
   m_ObjectHideFlags: 0
