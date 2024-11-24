@@ -48,9 +48,10 @@ public class GameManager : MonoBehaviour
         if (_playersTurnStates.Count==numberOfPlayers)
             StartGame();
     }
-    private void StartGame()
+    private async void StartGame()
     {
-        _cardDealer.DealCardsToPlayers();
+        await _cardDealer.DealCardsToCenter();
+        await _cardDealer.DealCardsToPlayers();
         
         _currentState = _playersTurnStates[_currentPlayerIndex];
         _currentState.EnterState();

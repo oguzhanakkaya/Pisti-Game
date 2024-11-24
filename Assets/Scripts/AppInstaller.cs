@@ -10,6 +10,7 @@ public class AppInstaller : MonoInstaller
     [SerializeField]private GameManager gameManager;
     [SerializeField]private CardDealer cardDealer;
     [SerializeField]private DrawPile drawPile;
+    [SerializeField]private DiscardPile discardPile;
     
     public override void InstallBindings()
     {
@@ -17,6 +18,7 @@ public class AppInstaller : MonoInstaller
         Container.Bind<GameManager>().FromInstance(gameManager).AsSingle();
         Container.Bind<CardDealer>().FromInstance(cardDealer).AsSingle();
         Container.Bind<DrawPile>().FromInstance(drawPile).AsSingle();
+        Container.Bind<DiscardPile>().FromInstance(discardPile).AsSingle();
         Container.Bind<IPlayer>().FromInstance(playerPrefab).AsTransient();
         Container.Bind<IPlayer>().FromInstance(botPlayerPrefab).AsTransient();
     }

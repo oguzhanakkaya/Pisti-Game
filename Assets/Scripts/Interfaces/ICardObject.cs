@@ -13,6 +13,7 @@ namespace Interfaces
         void SetSprite(Sprite sprite);
         void SetCardVisibility();
         void SetValueText();
+        void SetLayer(int layer);
          UniTask MoveCard(Vector3 position,float time);
     }
 }

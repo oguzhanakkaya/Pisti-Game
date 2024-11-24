@@ -13,6 +13,7 @@ public class CardDealer : MonoBehaviour
     
     [Inject]private EventBus _eventBus;
     [Inject]private DrawPile _drawPile;
+    [Inject]private DiscardPile _discardPile;
     
     private CardSpriteData _cardSpriteData;
     
@@ -32,7 +33,7 @@ public class CardDealer : MonoBehaviour
     {
         _players.Add(joinedEvent.Player);
     }
-    public async void DealCardsToPlayers()
+    public async UniTask DealCardsToPlayers()
     {
         await UniTask.DelayFrame(50);
         
@@ -40,8 +41,18 @@ public class CardDealer : MonoBehaviour
             for (int i = 0; i < 4; i++)
                 await DealCard(child is Player, child);
     }
+    public async UniTask DealCardsToCenter()
+    {
+        await UniTask.DelayFrame(50);
+        
+        for (int i = 0; i < 3; i++)
+            await DealCard(false);
+        
+        await DealCard(true);
+           
+    }
 
-    public async UniTask DealCard(bool isPlayer,IPlayer player)
+    private async UniTask DealCard(bool isPlayer,IPlayer player)
     {
         Card card=_drawPile.deck.GetRandomCard();
         
@@ -49,5 +60,14 @@ public class CardDealer : MonoBehaviour
         obj.Initialize(card,_cardSpriteData.GetCardSprite(card),isPlayer);
         
         await player.TakeCard(obj);
+    }
+    private async UniTask DealCard(bool isVisible)
+    {
+        Card card=_drawPile.deck.GetRandomCard();
+        
+        var obj=Instantiate(cardObject, transform.position, Quaternion.identity);
+        obj.Initialize(card,_cardSpriteData.GetCardSprite(card),isVisible);
+
+        await _discardPile.AddCardToDiscardPile(obj, null);
     }
 }

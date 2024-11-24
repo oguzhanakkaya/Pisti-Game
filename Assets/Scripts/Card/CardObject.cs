@@ -42,6 +42,12 @@ public class CardObject : MonoBehaviour,ICardObject
         valueText.text = CardData.cardNumber.ToString();
     }
 
+    public void SetLayer(int layer)
+    {
+        spriteRenderer.sortingOrder=layer;
+        valueText.sortingOrder=layer;
+    }
+
     public async UniTask MoveCard(Vector3 position,float time)
     {
         await transform.DOMove(position, time).SetEase(Ease.Linear);

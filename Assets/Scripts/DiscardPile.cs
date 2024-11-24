@@ -31,12 +31,16 @@ public class DiscardPile : MonoBehaviour
     {
         await AddCardToDiscardPile(obj.Card,obj.Player);
     }
-    private async UniTask AddCardToDiscardPile(CardObject cardObject,IPlayer player)
+    public async UniTask AddCardToDiscardPile(CardObject cardObject,IPlayer player)
     {
+        cardObject.SetLayer(_discardPileStack.Count);
         await cardObject.MoveCard(GetRandomPoint(), cardMoveSpeed);
-
+        
         var hasMatch = HasMatch(cardObject);
         _discardPileStack.Push(cardObject);
+        
+        if (player==null)
+            return;
 
         MoveGainedCardJob gainedCardJob = new MoveGainedCardJob(_discardPileStack.ToList(),player);
 

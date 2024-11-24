@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.EventBus;
 using Cysharp.Threading.Tasks;
 using Interfaces;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +12,8 @@ public class PlayerBase : MonoBehaviour,IPlayer
     [SerializeField] private float moveCardTime;
     [SerializeField] private int numberOfGainedCards;
     [SerializeField] private List<Transform> cardPoints;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI scoreText;
 
     public Transform Transform { get => transform; }
     public bool IsMyTurn { get; set; }
@@ -24,6 +27,8 @@ public class PlayerBase : MonoBehaviour,IPlayer
     public void Initialize()
     {
         SendPlayerJoinedEvent();
+        SetPlayerNameText();
+        SetPlayerScoreText();
     }
     private void Update()
     {
@@ -59,14 +64,32 @@ public class PlayerBase : MonoBehaviour,IPlayer
     {
         numberOfGainedCards += numberOfCards;
         Score+=score;
+        
+        SetPlayerScoreText();
     }
 
     public void EnterState()
     {
         IsMyTurn = true;
+        PlayCard();
+        
+    }
+
+    public virtual void PlayCard()
+    {
+        
     }
     public void ExitState()
     {
        
+    }
+
+    private void SetPlayerNameText()
+    {
+        nameText.text = gameObject.name;
+    }
+    private void SetPlayerScoreText()
+    {
+        scoreText.text = Score.ToString();
     }
 }
