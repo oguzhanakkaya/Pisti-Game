@@ -6,7 +6,7 @@ using Zenject;
 
 public class AppInstaller : MonoInstaller
 {
-    [FormerlySerializedAs("userPrefab")] [SerializeField]private Player playerPrefab;
+    [SerializeField]private User userPrefab;
     [SerializeField]private BotPlayer botPlayerPrefab;
     [SerializeField]private GameManager gameManager;
     [SerializeField]private CardDealer cardDealer;
@@ -20,7 +20,7 @@ public class AppInstaller : MonoInstaller
         Container.Bind<CardDealer>().FromInstance(cardDealer).AsSingle();
         Container.Bind<DrawPile>().FromInstance(drawPile).AsSingle();
         Container.Bind<DiscardPile>().FromInstance(discardPile).AsSingle();
-        Container.Bind<IPlayer>().FromInstance(playerPrefab).AsTransient();
+        Container.Bind<IPlayer>().FromInstance(userPrefab).AsTransient();
         Container.Bind<IPlayer>().FromInstance(botPlayerPrefab).AsTransient();
     }
 }

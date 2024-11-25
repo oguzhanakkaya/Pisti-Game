@@ -1,4 +1,4 @@
-public class Player : PlayerBase
+public class User : PlayerBase
 {
    public void CardPressed(CardObject card)
    {

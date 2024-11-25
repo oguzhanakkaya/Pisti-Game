@@ -1,13 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 public class PlayerInstaller : MonoBehaviour
 {
-    [FormerlySerializedAs("user")] [SerializeField]private Player player;
+    [SerializeField]private User user;
     [SerializeField]private BotPlayer botPlayer;
     [SerializeField]private List<Vector3> playersPoints;
     
@@ -22,14 +20,20 @@ public class PlayerInstaller : MonoBehaviour
     private void SpawnPlayers()
     {
        for (int i = 1; i < _gameManager.numberOfPlayers; i++)
-       {
-           IPlayer bot= _container.InstantiatePrefab(botPlayer, playersPoints[i], Quaternion.identity,null).GetComponent<IPlayer>();
-           bot.Initialize();
-       }
-       IPlayer player1= _container.InstantiatePrefab(player, playersPoints[0], Quaternion.identity,null).GetComponent<IPlayer>();
-       player1.Initialize();
+           SpawnBot(i);
+       
+       SpawnUser();
+    }
 
-         
+    private void SpawnUser()
+    {
+         IPlayer player1= _container.InstantiatePrefab(user, playersPoints[0], Quaternion.identity,null).GetComponent<IPlayer>();
+               player1.Initialize();
+    }
+    private void SpawnBot(int i)
+    {
+        IPlayer bot= _container.InstantiatePrefab(botPlayer, playersPoints[i], Quaternion.identity,null).GetComponent<IPlayer>();
+        bot.Initialize();
     }
     
     

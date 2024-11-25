@@ -6,10 +6,10 @@ using UnityEngine.Serialization;
 
 public class PlayerInputController : MonoBehaviour
 {
-    [FormerlySerializedAs("user")] [SerializeField] private Player player;
+    [SerializeField] private User user;
     void Update()
     {
-        if (!player.IsMyTurn)
+        if (!user.IsMyTurn)
             return;
         
         if (Input.GetMouseButtonDown(0))
@@ -24,7 +24,7 @@ public class PlayerInputController : MonoBehaviour
                 if (hit2.collider.gameObject.TryGetComponent<CardObject>(out CardObject cardObject) &&
                     cardObject != null)
                 {
-                    player.CardPressed(cardObject);
+                    user.CardPressed(cardObject);
                     return;
                 }
             }

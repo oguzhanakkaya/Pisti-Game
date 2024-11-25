@@ -48,7 +48,7 @@ public class CardDealer : MonoBehaviour
         
         foreach (var child in _players)
             for (int i = 0; i < 4; i++)
-                await DealCard(child is Player, child);
+                await DealCard(child is User, child);
 
         if (_drawPile.deck.cards.Count == 0)
         {
