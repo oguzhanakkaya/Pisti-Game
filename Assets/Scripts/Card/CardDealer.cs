@@ -14,7 +14,6 @@ public class CardDealer : MonoBehaviour
     
     [Inject]private EventBus _eventBus;
     [Inject]private DrawPile _drawPile;
-    [Inject]private DiscardPile _discardPile;
     
     private CardSpriteData _cardSpriteData;
     private bool _isCardsFinished;
@@ -62,10 +61,11 @@ public class CardDealer : MonoBehaviour
     {
         await UniTask.DelayFrame(_waitFrame);
         
-        for (int i = 0; i < 3; i++)
-            await DealCard(false);
+        for (int i = 0; i < 3; i++) 
+            DealCard(false);
         
-        await DealCard(true);
+        await UniTask.DelayFrame(_waitFrame/2); 
+        DealCard(true);
            
     }
     private async UniTask DealCard(bool isPlayer,IPlayer player)
@@ -77,13 +77,13 @@ public class CardDealer : MonoBehaviour
         
         await player.TakeCard(obj);
     }
-    private async UniTask DealCard(bool isVisible)
+    private void DealCard(bool isVisible)
     {
         Card card=_drawPile.deck.GetRandomCard();
         
         var obj=Instantiate(cardObject, transform.position, Quaternion.identity);
         obj.Initialize(card,_cardSpriteData.GetCardSprite(card),isVisible);
 
-        await _discardPile.AddCardToDiscardPile(obj, null);
+        _eventBus.Fire(new GameEvents.OnPlayerPlayCard(null,obj));
     }
 }

@@ -52,4 +52,5 @@ public class GameEvents
         }
     }
     public struct OnGameFinish {}
+    public struct OnMakeMatch{}
 }

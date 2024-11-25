@@ -24,9 +24,9 @@ public class PlayerBase : MonoBehaviour,IPlayer
     public List<CardObject> Cards { get; set; }=new List<CardObject>();
     public List<Transform> CardPoints { get => cardPoints; set => cardPoints = value; }
     
-    [Inject]private EventBus _eventBus;
+    [Inject]internal EventBus _eventBus;
     
-    public void Initialize()
+    public virtual void Initialize()
     {
         SendPlayerJoinedEvent();
         SetPlayerNameText();

@@ -15,7 +15,6 @@ public class CardObject : MonoBehaviour,ICardObject
     [SerializeField]public TextMeshPro valueText;
     [SerializeField]public Color redColor;
     [SerializeField]public Color blackColor;
-    [SerializeField]public Card cardObje;
 
     public bool IsVisible { get; set; }
     public Card CardData { get; set; }
@@ -37,11 +36,7 @@ public class CardObject : MonoBehaviour,ICardObject
 
     public void SetCardVisibility()
     {
-        if (!IsVisible)
-            spriteRenderer.color = Color.black;
-        else
-            spriteRenderer.color = Color.white;
-        
+        spriteRenderer.color = IsVisible ? Color.white : Color.black;
         valueText.gameObject.SetActive(CardData.cardNumber<10 && IsVisible);
     }
     public void SetValueText()

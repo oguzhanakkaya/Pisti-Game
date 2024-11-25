@@ -32,9 +32,11 @@ public class DiscardPile : MonoBehaviour
     {
         await AddCardToDiscardPile(obj.Card,obj.Player);
     }
-    public async UniTask AddCardToDiscardPile(CardObject cardObject,IPlayer player)
+    private async UniTask AddCardToDiscardPile(CardObject cardObject,IPlayer player)
     {
-        cardObject.SetLayer(_discardPileStack.Count);
+        if (cardObject.IsVisible)
+            cardObject.SetLayer(_discardPileStack.Count);
+        
         await cardObject.MoveCard(GetRandomPoint(), cardMoveSpeed);
         
         CheckCardHasScore(cardObject);
@@ -54,6 +56,8 @@ public class DiscardPile : MonoBehaviour
             
             _discardPileStack.Clear();
             currentCenterScore = 0;
+            
+            _eventBus.Fire(new GameEvents.OnMakeMatch());
         }
         player.SendTurnCompletedEvent();
     }
