@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -15,7 +13,7 @@ namespace Interfaces
         void SetValueText();
         void SetValueTextColor();
         void SetLayer(int layer);
-         UniTask MoveCard(Vector3 position,float time);
+        UniTask MoveCard(Vector3 position,float time);
     }
 }
 

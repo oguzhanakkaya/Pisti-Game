@@ -7,12 +7,7 @@ namespace Jobs
     public abstract class Job : IJob
     {
         public int ExecutionOrder { get; }
-        
-        protected Job()
-        {
-        }
-        
-        
+        protected Job() { }
         public abstract UniTask ExecuteAsync(CancellationToken cancellationToken = default);
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace System.EventBus
@@ -16,7 +15,6 @@ namespace System.EventBus
             }
             _eventHandlers[eventType].Add(handler);
         }
-    
         public void Unsubscribe<T>(Action<T> handler)
         {
             var eventType = typeof(T);
@@ -29,7 +27,6 @@ namespace System.EventBus
                 }
             }
         }
-    
         public void Fire<T>(T eventData)
         {
             var eventType = typeof(T);

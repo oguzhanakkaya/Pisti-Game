@@ -27,7 +27,6 @@ public class CardDealer : MonoBehaviour
         _eventBus.Subscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);
         
     }
-    
     private void OnDisable()
     {
         _eventBus.Unsubscribe<GameEvents.OnPlayerJoined>(OnPlayerJoined);

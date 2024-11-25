@@ -1,7 +1,6 @@
 using System.EventBus;
 using Interfaces;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 public class AppInstaller : MonoInstaller
