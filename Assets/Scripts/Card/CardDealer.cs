@@ -18,6 +18,8 @@ public class CardDealer : MonoBehaviour
     
     private CardSpriteData _cardSpriteData;
     private bool _isCardsFinished;
+
+    private readonly int _waitFrame = 25;
     
     public void Initialize()
     {
@@ -37,12 +39,12 @@ public class CardDealer : MonoBehaviour
     }
     public async UniTask DealCardsToPlayers()
     {
-        await UniTask.DelayFrame(50);
+        await UniTask.DelayFrame(_waitFrame);
 
         if (_isCardsFinished)
         {
             _eventBus.Fire(new GameEvents.OnGameFinish());
-            await UniTask.DelayFrame(50);
+            await UniTask.DelayFrame(_waitFrame);
             return;
         }
         
@@ -58,7 +60,7 @@ public class CardDealer : MonoBehaviour
     }
     public async UniTask DealCardsToCenter()
     {
-        await UniTask.DelayFrame(50);
+        await UniTask.DelayFrame(_waitFrame);
         
         for (int i = 0; i < 3; i++)
             await DealCard(false);

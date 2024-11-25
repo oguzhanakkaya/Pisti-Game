@@ -22,7 +22,7 @@ namespace Jobs
         }
         public override async UniTask ExecuteAsync(CancellationToken cancellationToken = default)
         {
-            await UniTask.Delay(500);
+            await UniTask.Delay(200);
             
             List<UniTask> moveTasks = new List<UniTask>();
 

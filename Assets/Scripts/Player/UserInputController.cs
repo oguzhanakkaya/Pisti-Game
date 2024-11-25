@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Interfaces;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class PlayerInputController : MonoBehaviour
+public class UserInputController : MonoBehaviour
 {
     [SerializeField] private User user;
     void Update()

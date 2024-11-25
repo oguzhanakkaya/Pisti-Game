@@ -97,8 +97,6 @@ public class GameManager : MonoBehaviour
         IPlayer firstPlayer = (IPlayer)_players[0];
         IPlayer secondPlayer = (IPlayer)_players[1];
         
-        Debug.LogError(firstPlayer.GainedCardsCount + " " + secondPlayer.GainedCardsCount);
-        
         if (firstPlayer.GainedCardsCount>secondPlayer.GainedCardsCount)
             firstPlayer.AddScore(0,3);
 

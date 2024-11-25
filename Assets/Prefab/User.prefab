@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 3684353321627016147}
   - component: {fileID: 769867729817275399}
   m_Layer: 0
-  m_Name: Player
+  m_Name: User
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   - {fileID: 1154966313568385007}
   nameText: {fileID: 7438442777944852760}
   scoreText: {fileID: 4074512810771842594}
-  playerName: Player
+  playerName: User
 --- !u!114 &769867729817275399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1565a8958e13bd4aafb91c3b89727b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 3684353321627016147}
+  user: {fileID: 3684353321627016147}
 --- !u!1 &4334792414828784004
 GameObject:
   m_ObjectHideFlags: 0
