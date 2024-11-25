@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99af62e1039e6f24ab04dfcefdea3ecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 3684353321627016147, guid: e0b20a377eca9f242a118bd6a66ac4e0, type: 3}
+  userPrefab: {fileID: 8204141525469689026, guid: e0b20a377eca9f242a118bd6a66ac4e0, type: 3}
   botPlayerPrefab: {fileID: 1698505262579723016, guid: 918093422e77bc449ad8e3fc12975b11, type: 3}
   gameManager: {fileID: 1389378194}
   cardDealer: {fileID: 686998597}
@@ -998,7 +998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 954212839f078d548a5cd4513b7492f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 3684353321627016147, guid: e0b20a377eca9f242a118bd6a66ac4e0, type: 3}
+  user: {fileID: 8204141525469689026, guid: e0b20a377eca9f242a118bd6a66ac4e0, type: 3}
   botPlayer: {fileID: 1698505262579723016, guid: 918093422e77bc449ad8e3fc12975b11, type: 3}
   playersPoints:
   - {x: 0, y: -4.75, z: 0}
@@ -1439,10 +1439,10 @@ RectTransform:
   - {fileID: 246667725}
   m_Father: {fileID: 128476717}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 1920}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1615537077
 CanvasRenderer:
