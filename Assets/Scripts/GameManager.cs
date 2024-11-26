@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
         _eventBus.Subscribe<GameEvents.OnGameFinish>(OnGameFinished);
 
         _currentPlayerIndex = 0;
+
+        Application.targetFrameRate = 60;
     }
     private void OnDisable()
     {
