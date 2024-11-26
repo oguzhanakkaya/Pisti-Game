@@ -88,7 +88,7 @@ public class DiscardPile : MonoBehaviour
     }
     private int GetScore()
     {
-        if (_discardPileStack.Count == 2)  // Is Pisti
+        if (_discardPileStack.Count == 2 && _discardPileStack.Peek().CardData.cardNumber!=10)  // Is Pisti
             currentCenterScore += 10;
         
         return currentCenterScore;
