@@ -3,14 +3,15 @@ using DG.Tweening;
 using Interfaces;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardObject : MonoBehaviour,ICardObject
 {
-    [SerializeField]public SpriteRenderer spriteRenderer;
-    [SerializeField]public BoxCollider2D boxCollider;
-    [SerializeField]public TextMeshPro valueText;
-    [SerializeField]public Color redColor;
-    [SerializeField]public Color blackColor;
+    [SerializeField]private SpriteRenderer spriteRenderer;
+    [SerializeField]private BoxCollider2D boxCollider;
+    [SerializeField]private Sprite unvisibleSprite;
+    
+    private Sprite visibleSprite;
 
     public bool IsVisible { get; set; }
     public Card CardData { get; set; }
@@ -21,37 +22,22 @@ public class CardObject : MonoBehaviour,ICardObject
         IsVisible = isVisible;
         
         SetSprite(sprite);
-        SetValueText();
-        SetValueTextColor();
         SetCardVisibility();
     }
     public void SetSprite(Sprite sprite)
     {
         spriteRenderer.sprite = sprite;
+        visibleSprite = sprite;
     }
 
     public void SetCardVisibility()
     {
-        spriteRenderer.color = IsVisible ? Color.white : Color.black;
-        valueText.gameObject.SetActive(CardData.cardNumber<10 && IsVisible);
-    }
-    public void SetValueText()
-    {
-        valueText.text = (CardData.cardNumber+1).ToString();
-    }
-
-    public void SetValueTextColor()
-    {
-        if (CardData.suit==0 || CardData.suit==2)
-            valueText.color = blackColor;
-        else 
-            valueText.color = redColor;
+        spriteRenderer.sprite = IsVisible ? visibleSprite : unvisibleSprite;
     }
 
     public void SetLayer(int layer)
     {
         spriteRenderer.sortingOrder=layer;
-        valueText.sortingOrder=layer;
     }
 
     public async UniTask MoveCard(Vector3 position,float time)

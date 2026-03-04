@@ -10,8 +10,6 @@ namespace Interfaces
         void Initialize(Card card, Sprite sprite, bool isVisible);
         void SetSprite(Sprite sprite);
         void SetCardVisibility();
-        void SetValueText();
-        void SetValueTextColor();
         void SetLayer(int layer);
         UniTask MoveCard(Vector3 position,float time);
     }
